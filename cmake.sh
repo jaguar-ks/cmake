@@ -8,19 +8,28 @@ PURPEL="\033[0;35m"
 YELLOW="\033[1;33m"
 RESET="\033[0m"
 
+printf "$GREEN
+         ██████╗███╗   ███╗ █████╗ ██╗  ██╗███████╗
+        ██╔════╝████╗ ████║██╔══██╗██║ ██╔╝██╔════╝
+        ██║     ██╔████╔██║███████║█████╔╝ █████╗  
+        ██║     ██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══╝  
+        ╚██████╗██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗
+         ╚═════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝$RESET
+                Made by:$RED 0xj4gu4r$RESET\n"
+
 touch Makefile
 
-echo "Specifiy the root directory of your source code: "
+printf "\r$BLUE[SOURCE CODE]:$RESET Specifiy the root directory of your source code: "
 
 read SDIR
 
 if [[ -d "$SDIR" ]]; then
-    echo "Specifiy the source code extantion: "
+    printf "\r$BLUE[EXTENTION]:$RESET Specifiy the source code extantion: "
     read EXT
-    while [ -z "$EXT" ]; do printf "$RED""ERROR:$RESET You entred an empty string try again.\n"; read EXT; done
+    while [ -z "$EXT" ]; do printf "\r$RED""ERROR:$RESET You entred an empty string try again: "; read EXT; done
     echo "SRC = " $(find $SDIR -type f -name "*.$EXT") > Makefile
 else
-    printf "$RED""ERROR: $RESET""There is no directory by the following name $BLUE<$SDIR>$RESET"
+    printf "\r$RED""ERROR: $RESET""There is no directory by the following name $BLUE<$SDIR>$RESET\n"
     rm -f Makefile
     exit 1
 fi
@@ -35,14 +44,14 @@ echo "OBJ = "'$(patsubst %, $(OBJ_DIR)/%, $(SRC:.'"$EXT"'=.o))' >> Makefile
 
 echo >> Makefile
 
-echo "Specifiy the root directory of your librareis: "
+printf "\r$BLUE[INCLUDES]:$RESET Specifiy the root directory of your librareis: "
 
 read LDIR
 
 if [[ -d "$LDIR" ]]; then
     echo "INC_DIR = $LDIR" >> Makefile
 else
-    printf "$RED""ERROR: $RESET""There is no directory by the following name$BLUE <$LDIR> $RESET"
+    printf "\r$RED""ERROR: $RESET""There is no directory by the following name$BLUE <$LDIR> $RESET\n"
     rm -f Makefile
     exit 1
 fi
@@ -53,12 +62,12 @@ echo "FLGS = -Wall -Wextra -Werror -std=c++98" >> Makefile
 
 echo >> Makefile
 
-echo "Entre the program name: "
+printf "\r$BLUE[EXECUTABLE NAME]:$RESET Entre the program name: "
 
 read PR_N
 
 while [[ -z "$PR_N" ]]; do
-    printf "$RED""ERROR:$RESET You entred an empty string try again.\n"
+    printf "\r$RED""ERROR:$RESET You entred an empty string try again.\n"
     read PR_N
 done
 
@@ -66,11 +75,11 @@ echo "NAME = $PR_N" >> Makefile
 
 echo >> Makefile
 
-echo "Specify the Compiler: "
+printf "\r$BLUE[COMPLIER]:$RESET Specify the Compiler: "
 
 read CMPL
 
-while [ -z "$CMPL" ]; do printf "$RED""ERROR:$RESET You entred an empty string try again.\n"; read CMPL; done
+while [ -z "$CMPL" ]; do printf "\r$RED""ERROR:$RESET You entred an empty string try again: "; read CMPL; done
 
 echo "all : "'$(NAME)' >> Makefile
 

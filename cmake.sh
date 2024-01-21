@@ -127,7 +127,7 @@ echo >> Makefile
 # [PATREN] RULE
 echo '$(OBJ_DIR)/%.o : '"$SDIR/"'%.'"$EXT"' $(INC_DIR)' >> Makefile
 echo -e '\tmkdir -p $(OBJ_DIR)' >> Makefile
-echo -e '\t'"$CMPL"' $(FLGS) -I$(INC_DIR) $< -o $@' >> Makefile
+echo -e '\t'"$CMPL"' $(FLGS) -I$(INC_DIR) -c $< -o $@' >> Makefile
 
 echo >> Makefile
 

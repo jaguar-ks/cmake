@@ -69,6 +69,12 @@ take_program_name(){
 
 welcome
 
+if [ $# -eq 1 ] && [ $1 == "update" ]; then
+    cd ~/.tools/cmake
+    git pull
+    exit
+fi
+
 touch Makefile
 
 # TAKING THE SRC DIR AND EXTANTION

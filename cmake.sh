@@ -87,7 +87,7 @@ echo "OBJ_DIR = obj" >> Makefile
 
 echo >> Makefile
 
-echo "OBJ = "'$(patsubst %, $(OBJ_DIR)/%, $(SRC:.'"$EXT"'=.o))' >> Makefile
+echo "OBJ = "'$(patsubst %, $(OBJ_DIR)/%, $(notdir $(SRC:.'"$EXT"'=.o)))' >> Makefile
 
 echo >> Makefile
 
@@ -120,26 +120,26 @@ echo >> Makefile
 
 # [NAME] RULE
 echo '$(NAME)'" : "'$(OBJ)' >> Makefile
-echo '  '"$CMPL"' $(FLGS) $^ -o $@' >> Makefile
+echo -e '\t'"$CMPL"' $(FLGS) $^ -o $@' >> Makefile
 
 echo >> Makefile
 
 # [PATREN] RULE
-echo '%.o : %.'"$EXT"' $(INC_DIR)' >> Makefile
-echo '  mkdir -p $(OBJ_DIR)' >> Makefile
-echo '  '"$CMPL"' $(FLGS) -I$(INC_DIR) $< -o $@' >> Makefile
+echo '$(OBJ_DIR)/%.o : '"$SDIR/"'%.'"$EXT"' $(INC_DIR)' >> Makefile
+echo -e '\tmkdir -p $(OBJ_DIR)' >> Makefile
+echo -e '\t'"$CMPL"' $(FLGS) -I$(INC_DIR) $< -o $@' >> Makefile
 
 echo >> Makefile
 
 # [CLEAN] RULE
 echo "clean :" >> Makefile
-echo '  rm -rf $(OBJ_DIR)' >> Makefile
+echo -e '\trm -rf $(OBJ_DIR)' >> Makefile
 
 echo >> Makefile
 
 # [FCLEAN] RULE
 echo "fclean : clean" >> Makefile
-echo '  rm -rf $(NAME)' >> Makefile
+echo -e '\trm -rf $(NAME)' >> Makefile
 
 echo >> Makefile
 
